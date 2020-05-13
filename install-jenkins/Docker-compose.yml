@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    user: root
+    ports:
+      - "3000:8080"
+      - "5000:5000"
+    volumes:
+      - volumenJenkins:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  volumenJenkins:
+    name: jenkins_home
+
+#dentro del contenedor se debe agregar el grupo Docker y añadir el usuario jenkins al grupo docker
+#             $groupadd docker && usermode -aG docker 'jenkins'
+#se debe dar accesos al archivo docker.sock
+#             $chmod 777 /var/run/docker.sock
